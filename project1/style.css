@@ -1,0 +1,48 @@
+.header {
+  width: 600px;
+  margin: 0 auto;
+  background-color: powderblue;
+  display: flex;
+  justify-content: space-between;
+}
+.header__title {
+  display: inline-grid;
+  align-items: center;
+}
+.nav li {
+  display: inline;
+  margin: 0 10px 0 10px;
+}
+
+.nav li:hover {
+  cursor: pointer;
+}
+
+.focus {
+  text-decoration: underline;
+}
+
+.hide {
+  display: none;
+}
+
+.content {
+  width: 600px;
+  margin: 20px auto;
+  display: block;
+  background-color: royalblue;
+  width: 600px;
+  border-radius: 5px;
+  box-shadow: 1px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-flow: column;
+}
+.content__home__name {
+  height: 100px;
+}
+.content__home__description {
+  background-color: white;
+  height: 150px;
+}
+
+/*# sourceMappingURL=style.css.map */

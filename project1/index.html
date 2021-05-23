@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thomas Ren</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header__title">Thomas Ren</div>
+        <div class="header__navbar">
+            <ul class="nav">
+                <li id="nav__home" class="focus" onclick="changeTab(this)">Home</li>
+                <li id="nav__resume" onclick="changeTab(this)">Resume</li>
+                <li id="nav__service" onclick="changeTab(this)">Service</li>
+                <li id="nav__about" onclick="changeTab(this)">Contact</li>
+            </ul>
+        </div>
+    </header>
+
+    <content class="content">
+        <div id="content__home">
+            <div class="content__home__name">Name</div>
+            <div class="content__home__description">
+                <div>About Me</div>
+                <div>Age</div>
+            </div>
+        </div>
+        <div id="content__resume" class="hide">RESUME</div>
+        <div id="content__service" class="hide">SERVICE</div>
+        <div id="content__about" class="hide">CONTACT</div>
+    </content>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

@@ -1,0 +1,197 @@
+/* for common use*/
+body {
+    font-family: Arial;
+}
+
+.viewbutton {
+    width: 130px;
+    height: 40px;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
+    display: inline-grid;
+    align-items: center;
+    background-color: rgba(0,128,255,1);
+}
+
+    .viewbutton:hover {
+        cursor: pointer;
+    }
+
+.italy {
+    width: 60px;
+    height: 20px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    text-align: center;
+    display: inline-grid;
+    align-items: center;
+}
+
+.rating_star {
+    color: rgba(244,217,49,1);
+}
+
+.text_address{
+    color: rgba(164,164,164,1);
+    font-size: 0.5rem;
+}
+
+
+/* card 8, Florence */
+.card8 {
+    position: absolute;
+    width: 736px;
+    height: 416px;
+    background-image: url("images/bg-2.png");
+}
+
+.card8__watermark {
+    position: absolute;
+    left: -110px;
+    top: 165px;
+    color: rgba(255,255,255,0.1);
+    font-size: 16rem;
+}
+
+.card8__bar {
+    position: absolute;
+    left: 8px;
+    top: 286px;
+    width: 4px;
+    height: 66px;
+    background-color: cyan;
+}
+
+.card8__date {
+    position: absolute;
+    left: 49px;
+    top: 286px;
+
+    color: cyan;
+}
+
+.card8__city {
+    position: absolute;
+    left: 51px;
+    top: 316px;
+
+    font-size: 2.5rem;
+    color: white;
+}
+
+.card8__button {
+    position: absolute;
+    left: 558px;
+    top: 325px;
+    
+}
+
+
+.card8__country {
+    position: absolute;
+    left: 628px;
+    top: 45px;
+    
+    background-color: rgba(255,255,255,1);
+}
+
+
+
+/* card 7, Venice Islands*/
+.card7 {
+    position: relative;
+    width: 340px;
+    height: 400px;
+    left: 100px;
+    top: 500px;
+    background: no-repeat url("images/bg-3.png");
+}
+
+.card7__country {
+    position: relative;
+    left: 250px;
+    top: 30px;
+    background-color: rgba(227,60,54,1);
+    color:rgba(255,255,255,1);
+}
+
+.card7__button {
+    position: absolute;
+    left: 100px;
+    top: 320px;
+}
+
+.card7__title {
+    position: absolute;
+    left: 30px;
+    top: 195px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card7__description {
+    position: absolute;
+    left: 30px;
+    top: 245px;
+    line-height: 25px;
+    display: block;
+
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 0, 0, 1)), to(rgba(240,240,240,1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* card 13, The Blue House */
+.card13 {
+    position: absolute;
+    left: 100px;
+    top: 1000px;
+    width: 340px;
+    height: 400px;
+    background-image: url("images/bg-6.png");
+}
+
+.card13__heart {
+    position: absolute;
+    left: 280px;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+.card13__tag {
+    position: absolute;
+    left: 20px;
+    top: 280px;
+    width:300px;
+    height: 150px;
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+}
+
+.card13__description {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+
+.card13__forward {
+    position: absolute;
+    left: 260px;
+    top: 100px;
+    width: 25px;
+    height: 25px;
+    color: white;
+
+    border-radius:12px;
+    text-align: center;
+    display: inline-grid;
+    align-items: center;
+    background-color: rgba(45,88,255,1);
+}
+
+    .card13__forward:hover {
+        cursor:pointer;
+    }
+

@@ -1,7 +1,6 @@
 .header {
   width: 600px;
   margin: 0 auto;
-  background-color: powderblue;
   display: flex;
   justify-content: space-between;
 }
@@ -20,6 +19,7 @@
 
 .focus {
   text-decoration: underline;
+  font-weight: bold;
 }
 
 .hide {
@@ -40,9 +40,24 @@
 .content__home__name {
   height: 100px;
 }
+.content__home__name__photo {
+  width: 90px;
+}
 .content__home__description {
   background-color: white;
   height: 150px;
+  display: flex;
+  justify-content: space-around;
+}
+.content__home__about {
+  padding: 20px 15px 0px 15px;
+  width: 40%;
+  font-size: 0.8rem;
+}
+.content__home__info {
+  padding: 5px 15px 5px 15px;
+  width: 40%;
+  font-size: 0.8rem;
 }
 
 /*# sourceMappingURL=style.css.map */

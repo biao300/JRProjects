@@ -5,7 +5,6 @@ body {
 .header {
     width: 600px;
     margin: 0 auto;
-    background-color: powderblue;
     display: flex;
     justify-content: space-between;
 
@@ -22,6 +21,7 @@ body {
 .nav li {
     display: inline;
     margin: 0 10px 0 10px;
+    //color: rgb(100,100,100);
 }
 
 .nav li:hover {
@@ -30,6 +30,8 @@ body {
 
 .focus {
     text-decoration: underline;
+    //color: rgb(0,0,0);
+    font-weight:bold;
 }
 
 .hide {
@@ -48,15 +50,31 @@ body {
     flex-flow: column;
 
     &__home {
-        
     }
 
     &__home__name {
         height: 100px;
+        &__photo {
+            width: 90px;
+        }
     }
 
     &__home__description {
         background-color: white;
         height: 150px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__home__about {
+        padding: 20px 15px 0px 15px;
+        width: 40%;
+        font-size: 0.8rem;
+    }
+
+    &__home__info {
+        padding: 5px 15px 5px 15px;
+        width: 40%;
+        font-size: 0.8rem;
     }
 }

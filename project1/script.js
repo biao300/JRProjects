@@ -1,4 +1,4 @@
-//sass D:\Work\Projects\htdocs\project1\style.scss D:\Work\Projects\htdocs\project1\style.css
+//D:\Work\node-v14.16.0-win-x64\sass style.scss style.css
 console.log("hello project one");
 
 

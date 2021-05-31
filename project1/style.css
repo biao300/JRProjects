@@ -37,11 +37,15 @@
   display: flex;
   flex-flow: column;
 }
-.content__home__name {
-  height: 100px;
+.content__home__title {
+  display: flex;
 }
-.content__home__name__photo {
+.content__home__photo {
   width: 90px;
+  border-radius: 45px;
+  position: relative;
+  left: 30px;
+  top: 20px;
 }
 .content__home__description {
   background-color: white;

@@ -50,31 +50,37 @@ body {
     flex-flow: column;
 
     &__home {
-    }
 
-    &__home__name {
-        height: 100px;
+        &__title {
+            display: flex;
+        }
+
         &__photo {
             width: 90px;
+            border-radius: 45px;
+            position: relative;
+            left:30px;
+            top: 20px;
+        }
+
+        &__description {
+            background-color: white;
+            height: 150px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        &__about {
+            padding: 20px 15px 0px 15px;
+            width: 40%;
+            font-size: 0.8rem;
+        }
+
+        &__info {
+            padding: 5px 15px 5px 15px;
+            width: 40%;
+            font-size: 0.8rem;
         }
     }
-
-    &__home__description {
-        background-color: white;
-        height: 150px;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    &__home__about {
-        padding: 20px 15px 0px 15px;
-        width: 40%;
-        font-size: 0.8rem;
-    }
-
-    &__home__info {
-        padding: 5px 15px 5px 15px;
-        width: 40%;
-        font-size: 0.8rem;
-    }
+    
 }

@@ -1,0 +1,37 @@
+.container {
+    margin:auto; // for align center
+    background: white url("../images/bg.jpg") no-repeat top;
+    width: 70%;
+    border-style: solid;
+    border-radius:10px;
+    border-width: 0.5px;
+    border-color: grey;
+
+    &__current {
+        height: 200px;
+
+        &__left {
+            color:white;
+        }
+    }
+
+    &__other {
+        height:250px;
+        background: white;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+.temprature {
+    margin: 0;
+    text-align: center;
+
+    &__line1 {
+        font-size: 2rem;
+    }
+
+    &__line2 {
+        font-size: 0.8rem;
+    }
+}

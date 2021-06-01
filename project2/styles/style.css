@@ -41,8 +41,23 @@
 .container__others__left {
   width: 33%;
 }
+.container__others__left__city {
+  padding-left: 10px;
+}
+.container__others__line {
+  width: 1%;
+  height: 70%;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-color: skyblue;
+  margin: auto;
+}
 .container__others__right {
-  width: 67%;
+  width: 66%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .temprature {
@@ -60,6 +75,14 @@
   margin: 0;
   text-align: center;
   font-size: 0.8rem;
+}
+
+.weekly {
+  padding-top: 20px;
+  text-align: center;
+}
+.weekly__image {
+  width: 32px;
 }
 
 /*# sourceMappingURL=style.css.map */

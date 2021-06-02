@@ -39,6 +39,7 @@
   flex-direction: row;
 }
 .container__others__left {
+  padding-top: 10px;
   width: 33%;
 }
 .container__others__left__city {

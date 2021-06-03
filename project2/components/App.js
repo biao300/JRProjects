@@ -15,9 +15,19 @@ let api_key = "3c8a6822afb89f8a6e9ba88e40c5ef0d";
 
 // city ids
 let melbourne = "2158177";
+let sydney = "2147714";
+
+let city_list = [
+    "2158177", // Melbourne
+    "2147714", // Sydney
+    "2174003", // Brisbane
+    "2172517", // Canberra
+    "2063523", // Perth
+    //"2073124", // Darwin
+];
 
 
-function GetWeatherByCityId(cityid, handleWeatherChange) {
+function GetCityWeatherById(cityid, callback) {
     let xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -25,13 +35,21 @@ function GetWeatherByCityId(cityid, handleWeatherChange) {
           //can get correct data here but can't pass out
           //console.log(this.responseText);
           
-          handleWeatherChange(JSON.parse(this.responseText));
+          callback(JSON.parse(this.responseText));
           // will get undefined if just use return...
           //return this.responseText;
         }
       };
       xhttp.open("GET", `${url_base}?id=${cityid}&appid=${api_key}`, true);
       xhttp.send();
+}
+
+function Kelvin2Celsius(temp) {
+    if (Number(temp) !== NaN) {
+        return parseInt(Number(temp) - 273.15);
+    } else {
+        return 0;
+    }
 }
 
 
@@ -42,28 +60,39 @@ class App extends React.Component {
 
         console.log("App constructor");
         this.state = {
-            data:undefined,
+            weathers:[],
         };
 
+        // must do this or will get "Cannot read property 'setState' of undefined"
         this.handleWeatherChange = this.handleWeatherChange.bind(this);
     }
 
     componentDidMount() {
         console.log("App did mount");
-        GetWeatherByCityId("2158177", this.handleWeatherChange);
+
+        for (let i = 0; i < city_list.length; i ++)
+        {
+            GetCityWeatherById(city_list[i], this.handleWeatherChange);
+        }
     }
 
     handleWeatherChange(newWeather) {
+        // make a copy of state
+        let {weathers} = this.state;
+        // change
+        weathers.push(newWeather);
+
+        // set & re-render
         this.setState({
-            data: newWeather,
-        })
+            weathers: weathers,
+        });
     }
 
     render() {
         console.log("App render()");
 
-        const data = this.state.data;
-        console.log(data);
+        const data = this.state.weathers;
+        //console.log(data);
 
         return (
             <div className="container">
@@ -71,33 +100,38 @@ class App extends React.Component {
                     <div className="container__current__left">
                         <div className="container__current__left__up">
                             <Temprature data={{
-                                temprature: data === undefined ? "0" : (data.main.temp - 273.15), 
-                                weather: data === undefined ? "" : data.weather[0].main
+                                temprature: data[0] === undefined ? "0" : Kelvin2Celsius(data[0].main.temp), 
+                                weather: data[0] === undefined ? "" : data[0].weather[0].main
                             }}/>
                         </div>
                         <div className="container__current__left__down">
                             <Detail data={{
                                 line1: "Humidity", 
-                                line2: data === undefined ? "0" : data.main.humidity + "%"
+                                line2: data[0] === undefined ? "0" : data[0].main.humidity + "%"
                             }} />
                             <p>|</p>
                             <Detail data={{
                                 line1: "Wind", 
-                                line2: data === undefined ? "0" : data.wind.speed + "m/s"
+                                line2: data[0] === undefined ? "0" : data[0].wind.speed + "m/s"
                             }} />
                         </div>
                     </div>
                     <div className="container__current__right">
-                        {data === undefined ? "" : data.name}
+                        {data[0] === undefined ? "" : data[0].name}
                     </div>
                 </div>
 
                 <div className="container__others">
                     <div className="container__others__left">
-                        <OtherCity data={{city: "Sydney", temprature: "18", weather: "Sunny"}}/>
-                        <OtherCity data={{city: "Brisbane", temprature: "22", weather: "Cloudy"}}/>
-                        <OtherCity data={{city: "Camberra", temprature: "10", weather: "Rainny"}}/>
-                        <OtherCity data={{city: "Perth", temprature: "9", weather: "Windy"}}/>
+                        {data.map((item, index) => {
+                            // use map() to render array elements, but need a key for DOM??
+                            return <OtherCity key={index} data={{
+                                        city: item === undefined ? "" : item.name, 
+                                        temprature: item === undefined ? "0" : Kelvin2Celsius(item.main.temp), 
+                                        weather: item === undefined ? "" : item.weather[0].main
+                                    }}/>
+                        })}
+
                     </div>
                     <div className="container__others__line"></div>
                     <div className="container__others__right">

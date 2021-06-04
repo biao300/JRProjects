@@ -16,7 +16,7 @@
 
         &__left {
             width:50%;
-            padding-top: 50px;
+            padding-top: 30px;
     
             &__down {
                 padding-top: 20px;
@@ -49,6 +49,10 @@
 
             &__city {
                 padding-left: 10px;
+
+                &__image {
+                    width: 24px;
+                }
             }
         }
 
@@ -76,11 +80,11 @@
     text-align: center;
 
     &__line1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     &__line2 {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
     }
 }
 

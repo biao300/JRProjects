@@ -9,18 +9,19 @@ import Weekly from './Weekly';
  * https://openweathermap.org/api
  * // https://api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
  * // https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
- * // this is paid service lol:
+ * 
+ * // this is for paid service lol:
  * // https://api.openweathermap.org/data/2.5/forecast/daily?id={city ID}&cnt={cnt}&appid={API key}
  */
 
-let url_base = "https://api.openweathermap.org/data/2.5";
-let api_key = "3c8a6822afb89f8a6e9ba88e40c5ef0d";
+// const data
+const url_base = "https://api.openweathermap.org/data/2.5";
+const api_key = "3c8a6822afb89f8a6e9ba88e40c5ef0d";
 
-// city coords
-// [latitude, longitude]
-let melbourne_coords = [-37.814, 144.9633];
+// city coords [latitude, longitude]
+const melbourne_coords = [-37.814, 144.9633];
 
-let city_list = [
+const city_list = [
     //"2158177", // Melbourne
     "2147714", // Sydney
     "2174003", // Brisbane
@@ -32,7 +33,7 @@ let city_list = [
 const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-
+// for api call
 function GetCityWeatherById(cityid, callback) {
     let xhttp = new XMLHttpRequest();
 
@@ -62,6 +63,7 @@ function GetCurrentCityWeather(coords, callback) {
     xhttp.send();
 }
 
+// process original data to fit for display
 function Kelvin2Celsius(temp) {
     if (Number(temp) !== NaN) {
         return parseInt(Number(temp) - 273.15);
@@ -204,11 +206,15 @@ class App extends React.Component {
 
 export default App;
 
+
+
 // 定制的组建名首字母一定要大写
 // 为什么要引入 React?
 // html attrs 的另命名
 
-/*
+/* 
+some command line memo:
+
 sass styles\style.scss styles\style.css
 npm run build
 */

@@ -4,14 +4,18 @@ import Detail from './Detail';
 import OtherCity from './OtherCity';
 import Weekly from './Weekly';
 
-
 /**
+ * base url:
  * https://openweathermap.org/api
- * // https://api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
- * // https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
  * 
- * // this is for paid service lol:
- * // https://api.openweathermap.org/data/2.5/forecast/daily?id={city ID}&cnt={cnt}&appid={API key}
+ * get by city id:
+ * https://api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
+ * 
+ * 5 days free api:
+ * https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
+ * 
+ * this is for paid service XD:
+ * https://api.openweathermap.org/data/2.5/forecast/daily?id={city ID}&cnt={cnt}&appid={API key}
  */
 
 // const data
@@ -33,8 +37,11 @@ const city_list = [
 const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
+const axios = require('axios');
+
 // for api call
 function GetCityWeatherById(cityid, callback) {
+    /*
     // use axios or got
     let xhttp = new XMLHttpRequest();
 
@@ -50,18 +57,26 @@ function GetCityWeatherById(cityid, callback) {
     };
     xhttp.open("GET", `${url_base}/weather?id=${cityid}&appid=${api_key}`, true);
     xhttp.send();
+    */
+
+    axios.get(`${url_base}/weather?id=${cityid}&appid=${api_key}`)
+    .then((response) => {
+        callback(response.data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 }
 
 function GetCurrentCityWeather(coords, callback) {
-    let xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            callback(JSON.parse(this.responseText));
-        }
-    };
-    xhttp.open("GET", `${url_base}/onecall?lat=${coords[0]}&lon=${coords[1]}&exclude=minutely,hourly,alerts&appid=${api_key}`, true);
-    xhttp.send();
+    // axios makes source code more readable
+    axios.get(`${url_base}/onecall?lat=${coords[0]}&lon=${coords[1]}&exclude=minutely,hourly,alerts&appid=${api_key}`)
+    .then((response) => {
+        callback(response.data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 }
 
 // process original data to fit for display
@@ -89,24 +104,24 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            current: undefined,
+            current: null,  // type: object
             others:[],
         };
 
-        // must do this or will get "Cannot read property 'setState' of undefined"
+        // must do this or we will get "Cannot read property 'setState' of undefined"
         this.handleWeatherChange = this.handleWeatherChange.bind(this);
         this.handleWeeklyChange = this.handleWeeklyChange.bind(this);
     }
 
     componentDidMount() {
+        // current city's weather + 5 days free api
         GetCurrentCityWeather(melbourne_coords, this.handleWeeklyChange);
 
         for (let i = 0; i < city_list.length; i ++)
         {
+            // for other cities current weather
             GetCityWeatherById(city_list[i], this.handleWeatherChange);
         }
-        
-        Unix2Date("1622858400");
     }
 
     handleWeatherChange(newWeather) {
@@ -132,8 +147,9 @@ class App extends React.Component {
 
     render() {
         const others = this.state.others;
-        //console.log(data);
+        //console.log(others);
         const current = this.state.current;
+        //console.log(current);
 
         const fiveDays = current ? current.daily.slice(1,6) : [];
 
@@ -166,14 +182,18 @@ class App extends React.Component {
 
                 <div className="container__others">
                     <div className="container__others__left">
-                        {others.map((item, index) => {
-                            // use map() to render array elements, but need a key for DOM??
-                            return <OtherCity key={index} data={{
-                                        city: item ? item.name : "",
-                                        temprature: item ? Kelvin2Celsius(item.main.temp) : "",
-                                        weather: item ? item.weather[0].main : ""
-                                    }}/>
-                        })}
+                        <table className="container__others__left__city">
+                            <tbody>
+                                {others.map((item, index) => {
+                                    // use map() to render array elements, but need a key for DOM??
+                                    return <OtherCity key={index} data={{
+                                                city: item ? item.name : "",
+                                                temprature: item ? Kelvin2Celsius(item.main.temp) : "",
+                                                weather: item ? item.weather[0].main : ""
+                                            }}/>
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                     <div className="container__others__line"></div>
                     <div className="container__others__right">

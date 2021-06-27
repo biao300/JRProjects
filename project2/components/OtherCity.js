@@ -7,11 +7,11 @@ class OtherCity extends React.Component {
 
     render(){
         return (
-            <p className="container__others__left__city">
-                {this.props.data.city + ' ' + this.props.data.temprature + ' '}
-                &nbsp;&nbsp;
-                <img src={`images/${this.props.data.weather}.png`} className="container__others__left__city__image" />
-            </p>
+            <tr>
+                <td>{this.props.data.city}</td>
+                <td>{this.props.data.temprature}</td>
+                <td><img src={`images/${this.props.data.weather}.png`} className="container__others__left__city__image" /></td>
+            </tr>
         );
     }
 }

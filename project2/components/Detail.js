@@ -8,7 +8,8 @@ class Detail extends React.Component {
     render(){
         return (
             <p className="detail">
-                <span className="">{this.props.data.line1}<br/></span>
+                <span className="">{this.props.data.line1}</span>
+                <br/>
                 <span className="">{this.props.data.line2}</span>
             </p>
         );

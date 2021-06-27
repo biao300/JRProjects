@@ -24,6 +24,10 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.container__current__left__down__line {
+  margin: 0;
+  border-left: white solid 2px;
+}
 .container__current__right {
   width: 50%;
   text-align: center;
@@ -78,7 +82,7 @@
 .detail {
   margin: 0;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .weekly {

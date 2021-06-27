@@ -35,6 +35,7 @@ const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV
 
 // for api call
 function GetCityWeatherById(cityid, callback) {
+    // use axios or got
     let xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -46,9 +47,9 @@ function GetCityWeatherById(cityid, callback) {
           // will get undefined if just use return...
           //return this.responseText;
         }
-      };
-      xhttp.open("GET", `${url_base}/weather?id=${cityid}&appid=${api_key}`, true);
-      xhttp.send();
+    };
+    xhttp.open("GET", `${url_base}/weather?id=${cityid}&appid=${api_key}`, true);
+    xhttp.send();
 }
 
 function GetCurrentCityWeather(coords, callback) {
@@ -65,11 +66,11 @@ function GetCurrentCityWeather(coords, callback) {
 
 // process original data to fit for display
 function Kelvin2Celsius(temp) {
-    if (Number(temp) !== NaN) {
-        return parseInt(Number(temp) - 273.15);
-    } else {
+    if (Number(temp) === NaN) {
         return 0;
     }
+
+    return parseInt(Number(temp) - 273.15) + "º";
 }
 
 function Timezone2City(timezone) {
@@ -79,19 +80,14 @@ function Timezone2City(timezone) {
 
 function Unix2Date(unix) {
     let date = new Date(unix * 1000);
-
     return date;
 }
-
-
-
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log("App constructor");
         this.state = {
             current: undefined,
             others:[],
@@ -103,8 +99,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log("App did mount");
-
         GetCurrentCityWeather(melbourne_coords, this.handleWeeklyChange);
 
         for (let i = 0; i < city_list.length; i ++)
@@ -137,14 +131,11 @@ class App extends React.Component {
     }
 
     render() {
-        console.log("App render()");
-
         const others = this.state.others;
         //console.log(data);
         const current = this.state.current;
-        console.log(current);
 
-        const fiveDays = (current === undefined) ? [] : current.daily.slice(1,6);
+        const fiveDays = current ? current.daily.slice(1,6) : [];
 
         return (
             <div className="container">
@@ -152,24 +143,24 @@ class App extends React.Component {
                     <div className="container__current__left">
                         <div className="container__current__left__up">
                             <Temprature data={{
-                                temprature: current === undefined ? "0" : Kelvin2Celsius(current.current.temp), 
-                                weather: current === undefined ? "" : current.current.weather[0].main
+                                temprature: current ? Kelvin2Celsius(current.current.temp) : "loading", 
+                                weather: current ? current.current.weather[0].main : ""
                             }}/>
                         </div>
                         <div className="container__current__left__down">
                             <Detail data={{
                                 line1: "Humidity", 
-                                line2: current === undefined ? "0" : current.current.humidity + "%"
+                                line2: current ? (current.current.humidity + "%") : ""
                             }} />
-                            <p>|</p>
+                            <p className="container__current__left__down__line"> </p>
                             <Detail data={{
                                 line1: "Wind", 
-                                line2: current === undefined ? "0" : current.current.wind_speed + " m/s"
+                                line2: current ? (current.current.wind_speed + " m/s") : ""
                             }} />
                         </div>
                     </div>
                     <div className="container__current__right">
-                        {current === undefined ? "" : Timezone2City(current.timezone)}
+                        {current ? Timezone2City(current.timezone) : ""}
                     </div>
                 </div>
 
@@ -178,17 +169,16 @@ class App extends React.Component {
                         {others.map((item, index) => {
                             // use map() to render array elements, but need a key for DOM??
                             return <OtherCity key={index} data={{
-                                        city: item === undefined ? "" : item.name, 
-                                        temprature: item === undefined ? "0" : Kelvin2Celsius(item.main.temp), 
-                                        weather: item === undefined ? "" : item.weather[0].main
+                                        city: item ? item.name : "",
+                                        temprature: item ? Kelvin2Celsius(item.main.temp) : "",
+                                        weather: item ? item.weather[0].main : ""
                                     }}/>
                         })}
-
                     </div>
                     <div className="container__others__line"></div>
                     <div className="container__others__right">
                         {fiveDays.map((item, index) => {
-                            if (item !== undefined) {
+                            if (item) {
                                 let date = Unix2Date(item.dt);
                                 return <Weekly key={index} data={{
                                             date: date.getDate() + " " + months[date.getMonth()],
@@ -205,8 +195,6 @@ class App extends React.Component {
 }
 
 export default App;
-
-
 
 // 定制的组建名首字母一定要大写
 // 为什么要引入 React?

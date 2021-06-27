@@ -1,3 +1,5 @@
+// cannot use this when interviewing
+// use create react app instead
 module.exports = {
     mode: 'development',
     entry: './index.js',
